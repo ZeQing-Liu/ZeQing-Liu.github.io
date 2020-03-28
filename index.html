@@ -311,7 +311,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/24/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98-Task1-%E8%B5%9B%E9%A2%98%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">Task_赛题理解</a>
+            <a href="/2020/03/24/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98-Task1-%E8%B5%9B%E9%A2%98%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">Task1_赛题理解</a>
         </h1>
 
         <div class="post-meta">
@@ -328,7 +328,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-28 17:08:01" itemprop="dateModified" datetime="2020-03-28T17:08:01+08:00">2020-03-28</time>
+                <time title="修改时间：2020-03-28 17:18:59" itemprop="dateModified" datetime="2020-03-28T17:18:59+08:00">2020-03-28</time>
               </span>
 
           
@@ -372,19 +372,18 @@
 <li>对于多类分类器/分类算法，评价指标主要有accuracy， [宏平均和微平均，F-score]。</li>
 </ul>
 <h4 id="对于回归预测类常见的评估指标如下"><a href="#对于回归预测类常见的评估指标如下" class="headerlink" title="对于回归预测类常见的评估指标如下:"></a>对于回归预测类常见的评估指标如下:</h4><ul>
-<li><p>平均绝对误差（Mean Absolute Error，MAE）$M A E=\frac{1}{N} \sum_{i=1}^{N}\left|y_{i}-\hat{y}_{i}\right|$</p>
+<li><p>平均绝对误差（Mean Absolute Error，MAE）<script type="math/tex">M A E=\frac{1}{N} \sum_{i=1}^{N}\left|y_{i}-\hat{y}_{i}\right|</script></p>
 </li>
-<li><p>均方误差（Mean Squared Error，MSE）$M S E=\frac{1}{N} \sum_{i=1}^{N}\left(y_{i}-\hat{y}_{i}\right)^{2}$</p>
+<li><p>均方误差（Mean Squared Error，MSE）<script type="math/tex">M S E=\frac{1}{N} \sum_{i=1}^{N}\left(y_{i}-\hat{y}_{i}\right)^{2}</script></p>
 </li>
 <li><p>平均绝对百分误差（Mean Absolute Percentage Error，MAPE）</p>
 </li>
 <li><p>均方根误差（Root Mean Squared Error）</p>
 </li>
 <li><p>R2（R-Square）</p>
-<p>残差平方和：$S S_{r e s}=\sum\left(y_{i}-\hat{y}_{i}\right)^{2}$</p>
-<p>总平均值:$S S_{t o t}=\sum\left(y_{i}-\bar{y}_{i}\right)^{2}$</p>
-<p>$R^{2}=1-\frac{S S_{r e s}}{S S_{t o t}}=1-\frac{\sum\left(y_{i}-\hat{y}_{i}\right)^{2}}{\sum\left(y_{i}-\bar{y}\right)^{2}}$</p>
-<blockquote>
+<p>残差平方和：<script type="math/tex">S S_{r e s}=\sum\left(y_{i}-\hat{y}_{i}\right)^{2}</script></p>
+<p>总平均值:<script type="math/tex">S S_{t o t}=\sum\left(y_{i}-\bar{y}_{i}\right)^{2}</script></p>
+<script type="math/tex; mode=display">R^{2}=1-\frac{S S_{r e s}}{S S_{t o t}}=1-\frac{\sum\left(y_{i}-\hat{y}_{i}\right)^{2}}{\sum\left(y_{i}-\bar{y}\right)^{2}}</script><blockquote>
 <p>R2用于度量因变量的变异中可由自变量解释部分所占的比例，取值范围是 0~1，R2越接近1,表明回归平方和占总平方和的比例越大,回归线与各观测点越接近，用x的变化来解释y值变化的部分就越多,回归的拟合程度就越好。所以R2也称为拟合优度（Goodness of Fit）的统计量。</p>
 </blockquote>
 </li>
@@ -454,7 +453,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-28 17:08:04" itemprop="dateModified" datetime="2020-03-28T17:08:04+08:00">2020-03-28</time>
+                <time title="修改时间：2020-03-28 17:16:09" itemprop="dateModified" datetime="2020-03-28T17:16:09+08:00">2020-03-28</time>
               </span>
 
           
@@ -536,14 +535,14 @@
 <li>Skewness &gt; 0 ，正偏差数值较大，为正偏或右偏。长尾巴拖在右边，数据右端有较多的极端值。</li>
 <li>Skewness &lt; 0 ，负偏差数值较大，为负偏或左偏。长尾巴拖在左边，数据左端有较多的极端值。</li>
 <li>数值的绝对值越大，表明数据分布越不对称，偏斜程度大。</li>
-<li>偏度是三阶中心距计算出来的。$\gamma_{1}=\mathrm{E}\left[\left(\frac{X-\mu}{\sigma}\right)^{3}\right]=\frac{\mu_{3}}{\sigma^{3}}=\frac{\mathrm{E}\left[(X-\mu)^{3}\right]}{\left(\mathrm{E}\left[(X-\mu)^{2}\right]\right)^{3 / 2}}=\frac{\kappa_{3}}{\kappa_{2}^{3 / 2}}$</li>
+<li>偏度是三阶中心距计算出来的。<script type="math/tex">\gamma_{1}=\mathrm{E}\left[\left(\frac{X-\mu}{\sigma}\right)^{3}\right]=\frac{\mu_{3}}{\sigma^{3}}=\frac{\mathrm{E}\left[(X-\mu)^{3}\right]}{\left(\mathrm{E}\left[(X-\mu)^{2}\right]\right)^{3 / 2}}=\frac{\kappa_{3}}{\kappa_{2}^{3 / 2}}</script></li>
 </ul>
 <p><strong>峰度（Kurtosis）</strong><br>偏度是描述某变量所有取值分布形态陡缓程度的统计量，简单来说就是数据分布顶的尖锐程度。</p>
 <ul>
 <li>Kurtosis = 0 与正态分布的陡缓程度相同。</li>
 <li>Kurtosis &gt; 0 比正态分布的高峰更加陡峭——尖顶峰。</li>
 <li>urtosis&lt;0 比正态分布的高峰来得平台——平顶峰。</li>
-<li>峰度是四阶标准矩计算出来的。$b_{1}=\frac{m_{3}}{s^{3}}=\frac{\frac{1}{n} \sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{3}}{\sqrt{\frac{1}{n-1} \sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}}=\frac{\frac{1}{n} \sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{3}}{\left[\frac{1}{n-1} \sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right]^{3 / 2}}$</li>
+<li>峰度是四阶标准矩计算出来的。<script type="math/tex">b_{1}=\frac{m_{3}}{s^{3}}=\frac{\frac{1}{n} \sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{3}}{\sqrt{\frac{1}{n-1} \sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}}=\frac{\frac{1}{n} \sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{3}}{\left[\frac{1}{n-1} \sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right]^{3 / 2}}</script></li>
 </ul>
 </blockquote>
 </li>
