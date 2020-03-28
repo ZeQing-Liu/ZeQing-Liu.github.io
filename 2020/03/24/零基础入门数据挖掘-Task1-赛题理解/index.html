@@ -241,25 +241,25 @@
 <li>price - 汽车价格</li>
 <li>v_0’, ‘v_1’, ‘v_2’, ‘v_3’, ‘v_4’, ‘v_5’, ‘v_6’, ‘v_7’, ‘v_8’, ‘v_9’, ‘v_10’, ‘v_11’, ‘v_12’, ‘v_13’,’v_14’ 【匿名特征，包含v0-14在内15个匿名特征】</li>
 </ul>
-<h2 id="1-3-预测指标"><a href="#1-3-预测指标" class="headerlink" title="1.3 预测指标"></a>1.3 预测指标</h2><p><strong>Mean Absolute Error：</strong>$M A E=\frac{\sum<em>{i=1}^{n}\left|y</em>{i}-\hat{y}_{i}\right|}{n}$</p>
+<h2 id="1-3-预测指标"><a href="#1-3-预测指标" class="headerlink" title="1.3 预测指标"></a>1.3 预测指标</h2><p><strong>Mean Absolute Error：</strong>$M A E=\frac{\sum_{i=1}^{n}\left|y_{i}-\hat{y}_{i}\right|}{n}$</p>
 <p>其中$y_i$代表第i个样本的真实值，其中$y^i$代表第i个样本的预测值。</p>
 <h4 id="分类算法常见的评估指标如下："><a href="#分类算法常见的评估指标如下：" class="headerlink" title="分类算法常见的评估指标如下："></a>分类算法常见的评估指标如下：</h4><ul>
 <li>对于二类分类器/分类算法，评价指标主要有accuracy， [Precision，Recall，F-score，Pr曲线]，ROC-AUC曲线。</li>
 <li>对于多类分类器/分类算法，评价指标主要有accuracy， [宏平均和微平均，F-score]。</li>
 </ul>
 <h4 id="对于回归预测类常见的评估指标如下"><a href="#对于回归预测类常见的评估指标如下" class="headerlink" title="对于回归预测类常见的评估指标如下:"></a>对于回归预测类常见的评估指标如下:</h4><ul>
-<li><p>平均绝对误差（Mean Absolute Error，MAE）$M A E=\frac{1}{N} \sum<em>{i=1}^{N}\left|y</em>{i}-\hat{y}_{i}\right|$</p>
+<li><p>平均绝对误差（Mean Absolute Error，MAE）$M A E=\frac{1}{N} \sum_{i=1}^{N}\left|y_{i}-\hat{y}_{i}\right|$</p>
 </li>
-<li><p>均方误差（Mean Squared Error，MSE）$M S E=\frac{1}{N} \sum<em>{i=1}^{N}\left(y</em>{i}-\hat{y}_{i}\right)^{2}$</p>
+<li><p>均方误差（Mean Squared Error，MSE）$M S E=\frac{1}{N} \sum_{i=1}^{N}\left(y_{i}-\hat{y}_{i}\right)^{2}$</p>
 </li>
 <li><p>平均绝对百分误差（Mean Absolute Percentage Error，MAPE）</p>
 </li>
 <li><p>均方根误差（Root Mean Squared Error）</p>
 </li>
 <li><p>R2（R-Square）</p>
-<p>残差平方和：$S S<em>{r e s}=\sum\left(y</em>{i}-\hat{y}_{i}\right)^{2}$</p>
-<p>总平均值:$S S<em>{t o t}=\sum\left(y</em>{i}-\bar{y}_{i}\right)^{2}$</p>
-<p>$R^{2}=1-\frac{S S<em>{r e s}}{S S</em>{t o t}}=1-\frac{\sum\left(y<em>{i}-\hat{y}</em>{i}\right)^{2}}{\sum\left(y_{i}-\bar{y}\right)^{2}}$</p>
+<p>残差平方和：$S S_{r e s}=\sum\left(y_{i}-\hat{y}_{i}\right)^{2}$</p>
+<p>总平均值:$S S_{t o t}=\sum\left(y_{i}-\bar{y}_{i}\right)^{2}$</p>
+<p>$R^{2}=1-\frac{S S_{r e s}}{S S_{t o t}}=1-\frac{\sum\left(y_{i}-\hat{y}_{i}\right)^{2}}{\sum\left(y_{i}-\bar{y}\right)^{2}}$</p>
 <blockquote>
 <p>R2用于度量因变量的变异中可由自变量解释部分所占的比例，取值范围是 0~1，R2越接近1,表明回归平方和占总平方和的比例越大,回归线与各观测点越接近，用x的变化来解释y值变化的部分就越多,回归的拟合程度就越好。所以R2也称为拟合优度（Goodness of Fit）的统计量。</p>
 </blockquote>
@@ -366,12 +366,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/14/Information-Extraction/" rel="prev" title="Information-Extraction">
-      <i class="fa fa-chevron-left"></i> Information-Extraction
+    <a href="/2020/03/24/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98-Task2-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="prev" title="Task2_数据分析">
+      <i class="fa fa-chevron-left"></i> Task2_数据分析
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/24/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98-Task2-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="next" title="Task2_数据分析">
-      Task2_数据分析 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/28/Task3-%E7%89%B9%E7%A7%8D%E5%B7%A5%E7%A8%8B/" rel="next" title="Task3_特种工程（学习打卡）">
+      Task3_特种工程（学习打卡） <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
