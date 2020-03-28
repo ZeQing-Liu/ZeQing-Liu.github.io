@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/00831rSTly1gd2r2apj8jj30nc0e00t3.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/00831rSTly1gd2r2hk0svj30n80dst94.jpg">
 <meta property="article:published_time" content="2020-03-24T02:27:11.000Z">
-<meta property="article:modified_time" content="2020-03-28T08:48:26.531Z">
+<meta property="article:modified_time" content="2020-03-28T09:08:04.687Z">
 <meta property="article:author" content="ZQ Liu">
 <meta property="article:tag" content="数据挖掘">
 <meta name="twitter:card" content="summary">
@@ -207,7 +207,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-28 16:48:26" itemprop="dateModified" datetime="2020-03-28T16:48:26+08:00">2020-03-28</time>
+                <time title="修改时间：2020-03-28 17:08:04" itemprop="dateModified" datetime="2020-03-28T17:08:04+08:00">2020-03-28</time>
               </span>
 
           
@@ -233,8 +233,7 @@
 <li>对于Label做专门的分析，分析标签的分布情况等。</li>
 <li>进步分析可以通过对特征作图，特征和label联合做图（统计图，离散图），直观了解特征的分布情况，通过这一步也可以发现数据之中的一些异常值等，通过箱型图分析一些特征值的偏离情况，对于特征和特征联合作图，对于特征和label联合作图，分析其中的一些关联性。</li>
 </ol>
-<p>##本次学习打卡内容</p>
-<ol>
+<h2 id="本次学习打卡内容"><a href="#本次学习打卡内容" class="headerlink" title="本次学习打卡内容"></a>本次学习打卡内容</h2><ol>
 <li><p>载入各种数据科学以及可视化库:</p>
 <ul>
 <li>数据科学库 pandas、numpy、scipy；</li>
@@ -249,17 +248,13 @@
 </li>
 <li><p>简略观察数据(head()+shape)；</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Train_data.head().append(Train_data.tail())</span><br><span class="line">Train_data.shape</span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ul>
 </li>
 </ol>
-<ol start="3">
+<ol>
 <li><p>数据总览:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Train_data.describe()</span><br><span class="line">Train_data.info()</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><p>通过describe()来熟悉数据的相关统计量。</p>
 <p>describe种有每列的统计量，个数count、平均值mean、方差std、最小值min、中位数25% 50% 75% 、以及最大值，可以掌握数据的大概的范围以及每个值的异常值的判断</p>
@@ -270,7 +265,6 @@
 </li>
 <li><p>判断数据缺失和异常</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Train_data.isnull().sum()</span><br><span class="line"></span><br><span class="line"><span class="comment"># nan可视化</span></span><br><span class="line">missing = Train_data.isnull().sum()</span><br><span class="line">missing = missing[missing &gt; <span class="number">0</span>]</span><br><span class="line">missing.sort_values(inplace=<span class="literal">True</span>)</span><br><span class="line">missing.plot.bar()</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><p>查看每列的存在缺省的情况</p>
 </li>
@@ -287,7 +281,6 @@
 </li>
 <li><p>查看预测值的具体频数</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Train_data[<span class="string">'price'</span>]</span><br><span class="line">Train_data[<span class="string">'price'</span>].value_counts()</span><br><span class="line"></span><br><span class="line"><span class="comment">## 1) 总体分布概况（无界约翰逊分布等）</span></span><br><span class="line"><span class="keyword">import</span> scipy.stats <span class="keyword">as</span> st</span><br><span class="line">y = Train_data[<span class="string">'price'</span>]</span><br><span class="line">plt.figure(<span class="number">1</span>); plt.title(<span class="string">'Johnson SU'</span>)</span><br><span class="line">sns.distplot(y, kde=<span class="literal">False</span>, fit=st.johnsonsu)</span><br><span class="line">plt.figure(<span class="number">2</span>); plt.title(<span class="string">'Normal'</span>)</span><br><span class="line">sns.distplot(y, kde=<span class="literal">False</span>, fit=st.norm)</span><br><span class="line">plt.figure(<span class="number">3</span>); plt.title(<span class="string">'Log Normal'</span>)</span><br><span class="line">sns.distplot(y, kde=<span class="literal">False</span>, fit=st.lognorm)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 2) 查看skewness and kurtosis</span></span><br><span class="line">sns.distplot(Train_data[<span class="string">'price'</span>]);</span><br><span class="line">print(<span class="string">"Skewness: %f"</span> % Train_data[<span class="string">'price'</span>].skew())</span><br><span class="line">print(<span class="string">"Kurtosis: %f"</span> % Train_data[<span class="string">'price'</span>].kurt())</span><br><span class="line">sns.distplot(Train_data.skew(),color=<span class="string">'blue'</span>,axlabel =<span class="string">'Skewness'</span>)</span><br><span class="line">sns.distplot(Train_data.kurt(),color=<span class="string">'orange'</span>,axlabel =<span class="string">'Kurtness'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 3) 查看预测值的具体频数</span></span><br><span class="line">plt.hist(Train_data[<span class="string">'price'</span>], orientation = <span class="string">'vertical'</span>,histtype = <span class="string">'bar'</span>, color =<span class="string">'red'</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># log变换 z之后的分布较均匀，可以进行log变换进行预测，这也是预测问题常用的trick</span></span><br><span class="line">plt.hist(np.log(Train_data[<span class="string">'price'</span>]), orientation = <span class="string">'vertical'</span>,histtype = <span class="string">'bar'</span>, color =<span class="string">'red'</span>) </span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
 <p><img src="https://tva1.sinaimg.cn/large/00831rSTly1gd2r2apj8jj30nc0e00t3.jpg" alt="image-20200322154426974" style="zoom: 33%;" /><img src="https://tva1.sinaimg.cn/large/00831rSTly1gd2r2hk0svj30n80dst94.jpg" alt="image-20200322154437733" style="zoom: 33%;" /></p>
 <blockquote>
 <p><strong>偏度（Skewness）</strong><br>是描述数据分布形态的统计量，其描述的是某总体取值分布的对称性，简单来说就是数据的不对称程度。</p>
@@ -296,14 +289,14 @@
 <li>Skewness &gt; 0 ，正偏差数值较大，为正偏或右偏。长尾巴拖在右边，数据右端有较多的极端值。</li>
 <li>Skewness &lt; 0 ，负偏差数值较大，为负偏或左偏。长尾巴拖在左边，数据左端有较多的极端值。</li>
 <li>数值的绝对值越大，表明数据分布越不对称，偏斜程度大。</li>
-<li>偏度是三阶中心距计算出来的。$\gamma_{1}=\mathrm{E}\left[\left(\frac{X-\mu}{\sigma}\right)^{3}\right]=\frac{\mu_{3}}{\sigma^{3}}=\frac{\mathrm{E}\left[(X-\mu)^{3}\right]}{\left(\mathrm{E}\left[(X-\mu)^{2}\right]\right)^{3 / 2}}=\frac{\kappa_{3}}{\kappa_{2}^{3 / 2}}$</li>
+<li>偏度是三阶中心距计算出来的。$\gamma<em>{1}=\mathrm{E}\left[\left(\frac{X-\mu}{\sigma}\right)^{3}\right]=\frac{\mu</em>{3}}{\sigma^{3}}=\frac{\mathrm{E}\left[(X-\mu)^{3}\right]}{\left(\mathrm{E}\left[(X-\mu)^{2}\right]\right)^{3 / 2}}=\frac{\kappa<em>{3}}{\kappa</em>{2}^{3 / 2}}$</li>
 </ul>
 <p><strong>峰度（Kurtosis）</strong><br>偏度是描述某变量所有取值分布形态陡缓程度的统计量，简单来说就是数据分布顶的尖锐程度。</p>
 <ul>
 <li>Kurtosis = 0 与正态分布的陡缓程度相同。</li>
 <li>Kurtosis &gt; 0 比正态分布的高峰更加陡峭——尖顶峰。</li>
 <li>urtosis&lt;0 比正态分布的高峰来得平台——平顶峰。</li>
-<li>峰度是四阶标准矩计算出来的。$b_{1}=\frac{m_{3}}{s^{3}}=\frac{\frac{1}{n} \sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{3}}{\sqrt{\frac{1}{n-1} \sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}}=\frac{\frac{1}{n} \sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{3}}{\left[\frac{1}{n-1} \sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right]^{3 / 2}}$</li>
+<li>峰度是四阶标准矩计算出来的。$b<em>{1}=\frac{m</em>{3}}{s^{3}}=\frac{\frac{1}{n} \sum<em>{i=1}^{n}\left(x</em>{i}-\bar{x}\right)^{3}}{\sqrt{\frac{1}{n-1} \sum<em>{i=1}^{n}\left(x</em>{i}-\bar{x}\right)^{2}}}=\frac{\frac{1}{n} \sum<em>{i=1}^{n}\left(x</em>{i}-\bar{x}\right)^{3}}{\left[\frac{1}{n-1} \sum<em>{i=1}^{n}\left(x</em>{i}-\bar{x}\right)^{2}\right]^{3 / 2}}$</li>
 </ul>
 </blockquote>
 </li>
@@ -311,18 +304,13 @@
 </li>
 <li><p>特征分为类别特征和数字特征，并对类别特征查看unique分布</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这个区别方式适用于没有直接label coding的数据</span></span><br><span class="line"><span class="comment"># 这里不适用，需要人为根据实际含义来区分</span></span><br><span class="line"><span class="comment"># 数字特征</span></span><br><span class="line"><span class="comment"># numeric_features = Train_data.select_dtypes(include=[np.number])</span></span><br><span class="line"><span class="comment"># numeric_features.columns</span></span><br><span class="line"><span class="comment"># # 类型特征</span></span><br><span class="line"><span class="comment"># categorical_features = Train_data.select_dtypes(include=[np.object])</span></span><br><span class="line"><span class="comment"># categorical_features.columns</span></span><br></pre></td></tr></table></figure>
-
 <p>分离label即预测值</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Y_train = Train_data[<span class="string">'price'</span>]</span><br><span class="line">numeric_features = [<span class="string">'power'</span>, <span class="string">'kilometer'</span>, <span class="string">'v_0'</span>, <span class="string">'v_1'</span>, <span class="string">'v_2'</span>, <span class="string">'v_3'</span>, <span class="string">'v_4'</span>, <span class="string">'v_5'</span>, <span class="string">'v_6'</span>, <span class="string">'v_7'</span>, <span class="string">'v_8'</span>, <span class="string">'v_9'</span>, <span class="string">'v_10'</span>, <span class="string">'v_11'</span>, <span class="string">'v_12'</span>, <span class="string">'v_13'</span>,<span class="string">'v_14'</span> ]</span><br><span class="line"></span><br><span class="line">categorical_features = [<span class="string">'name'</span>, <span class="string">'model'</span>, <span class="string">'brand'</span>, <span class="string">'bodyType'</span>, <span class="string">'fuelType'</span>, <span class="string">'gearbox'</span>, <span class="string">'notRepairedDamage'</span>, <span class="string">'regionCode'</span>,]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 特征nunique分布</span></span><br><span class="line"><span class="keyword">for</span> cat_fea <span class="keyword">in</span> categorical_features:</span><br><span class="line">    print(cat_fea + <span class="string">"的特征分布如下："</span>)</span><br><span class="line">    print(<span class="string">"&#123;&#125;特征有个&#123;&#125;不同的值"</span>.format(cat_fea, Train_data[cat_fea].nunique()))</span><br><span class="line">    print(Train_data[cat_fea].value_counts())</span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ol>
-<ol start="7">
+<ol>
 <li><p>数字特征分析</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">numeric_features.append(&#39;price&#39;)</span><br><span class="line">numeric_features</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><p>相关性分析</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 1) 相关性分析</span></span><br><span class="line">price_numeric = Train_data[numeric_features]</span><br><span class="line">correlation = price_numeric.corr()</span><br><span class="line">print(correlation[<span class="string">'price'</span>].sort_values(ascending = <span class="literal">False</span>),<span class="string">'\n'</span>)</span><br><span class="line"></span><br><span class="line">f , ax = plt.subplots(figsize = (<span class="number">7</span>, <span class="number">7</span>))</span><br><span class="line">plt.title(<span class="string">'Correlation of Numeric Features with Price'</span>,y=<span class="number">1</span>,size=<span class="number">16</span>)</span><br><span class="line">sns.heatmap(correlation,square = <span class="literal">True</span>,  vmax=<span class="number">0.8</span>)</span><br><span class="line"><span class="keyword">del</span> price_numeric[<span class="string">'price'</span>]</span><br></pre></td></tr></table></figure>
@@ -358,9 +346,6 @@
 </li>
 <li><p>用pandas_profiling生成数据报告</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import pandas_profiling</span><br><span class="line">pfr &#x3D; pandas_profiling.ProfileReport(Train_data)</span><br><span class="line">pfr.to_file(&quot;.&#x2F;example.html&quot;)</span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ol>
 
@@ -379,7 +364,7 @@
   <p><span>本文标题:</span>Task2_数据分析</a></p>
   <p><span>文章作者:</span>ZQ Liu</a></p>
   <p><span>发布时间:</span>2020年03月24日 - 10:27:11</p>
-  <p><span>最后更新:</span>2020年03月28日 - 16:48:26</p>
+  <p><span>最后更新:</span>2020年03月28日 - 17:08:04</p>
   <p><span>原始链接:</span><a href="/2020/03/24/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98-Task2-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" title="Task2_数据分析">http://yoursite.com/2020/03/24/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98-Task2-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2020/03/24/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98-Task2-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"  aria-label="复制成功！"></i></span>
   </p>
@@ -458,12 +443,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/14/Information-Extraction/" rel="prev" title="Information-Extraction">
-      <i class="fa fa-chevron-left"></i> Information-Extraction
+    <a href="/2020/03/24/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98-Task1-%E8%B5%9B%E9%A2%98%E7%90%86%E8%A7%A3/" rel="prev" title="Task_赛题理解">
+      <i class="fa fa-chevron-left"></i> Task_赛题理解
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/24/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98-Task1-%E8%B5%9B%E9%A2%98%E7%90%86%E8%A7%A3/" rel="next" title="Task_赛题理解">
-      Task_赛题理解 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/28/Task3-%E7%89%B9%E7%A7%8D%E5%B7%A5%E7%A8%8B/" rel="next" title="Task3_特种工程（学习打卡）">
+      Task3_特种工程（学习打卡） <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -525,7 +510,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#EDA-Exploratory-Data-Analysis"><span class="nav-number">1.</span> <span class="nav-text">EDA(Exploratory Data Analysis)</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#EDA-Exploratory-Data-Analysis"><span class="nav-number">1.</span> <span class="nav-text">EDA(Exploratory Data Analysis)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本次学习打卡内容"><span class="nav-number">2.</span> <span class="nav-text">本次学习打卡内容</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -654,6 +639,61 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
