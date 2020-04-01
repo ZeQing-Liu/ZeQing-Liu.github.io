@@ -197,7 +197,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-04-01 11:28:03 / 修改时间：20:28:13" itemprop="dateCreated datePublished" datetime="2020-04-01T11:28:03+08:00">2020-04-01</time>
+              <time title="创建时间：2020-04-01 11:28:03 / 修改时间：20:36:12" itemprop="dateCreated datePublished" datetime="2020-04-01T11:28:03+08:00">2020-04-01</time>
             </span>
 
           
@@ -213,7 +213,7 @@
 
 
       
-          <h2 id="基础学习："><a href="#基础学习：" class="headerlink" title="基础学习："></a>基础学习：</h2><h4 id="Liner-Regression"><a href="#Liner-Regression" class="headerlink" title="Liner Regression"></a>Liner Regression</h4><p><img src="https://www.zhihu.com/equation?tex=f(x" alt="[公式]">%3Dw’x%2Bb)</p>
+          <h2 id="基础学习："><a href="#基础学习：" class="headerlink" title="基础学习："></a>基础学习：</h2><h4 id="Liner-Regression"><a href="#Liner-Regression" class="headerlink" title="Liner Regression"></a>Liner Regression</h4><p>$f(x)=w^{\prime} x+b$</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#w是列向量 矩阵由一个个列向量构成 y = dot(w_t,X)+b</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">w_t,b = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]),<span class="number">1</span></span><br><span class="line">X = np.array([[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>]]).T</span><br><span class="line">y_hat = np.dot(w,X) + b</span><br></pre></td></tr></table></figure>
 <p>策略：通过<strong>loss</strong>衡量w和b。$loss=(f(x)-y)^{2}$</p>
 <p>优化：</p>
@@ -232,22 +232,22 @@
 <ul>
 <li><p><strong>回归树生成</strong>：一个回归树对应的输入空间的一个划分，假设已经将输入空间划分为M个单元R1,R2,R3….Rm，并且每个单元都有固定的输出值cm，其中I为判别函数。</p>
 <p>输入：训练数据集D={(x1,y1),(x2,y2),….,(xn,yn)}</p>
-<p>输出：一颗回归树 <img src="https://www.zhihu.com/equation?tex=f(x" alt="[公式]">%3D\sum_{m%3D1}^{M}{\hat{c}_mI(x\in+R_m)})</p>
+<p>输出：一颗回归树 $f(x)=\sum_{m=1}^{M} \hat{c}_{m} I\left(x \in R_{m}\right)$</p>
 <p><img src="https://www.zhihu.com/equation?tex=loss%3D%5Csum_%7Bx_i%5Cin+R_m%7D%7B%28y_i+-+f%28x_i%29%29%5E2%7D" alt="[公式]">。</p>
 <p><em>可知</em>：Rm上的最优输出值就是Rm内所有样本xi对应yi的均值。</p>
 <p><u>如何对输入空间进行划分？</u>：选择最优的特征作为划分。如果特征是连续变量，R1 = {x|x^j==s} and R2 = {x|x^j != s}；寻找最优的变量j和最优切分点s：</p>
-<p><img src="https://www.zhihu.com/equation?tex=min_{j%2Cs}[min_{c_1}\sum_{x_i\in+R_1}{(y_i-c_1" alt="[公式]">^2%2Bminc_2}\sum_{x_i\in+R_2}{(y_i-c_2)^2}])</p>
-</li>
+<script type="math/tex; mode=display">
+\min _{j, s}\left[\min _{c_{1}} \sum_{x_{i} \in R_{1}}\left(y_{i}-c_{1}\right)^{2}+\min c_{2} \sum_{x_{i} \in R_{2}}\left(y_{i}-c_{2}\right)^{2}\right]</script></li>
 <li><p><strong>回归树剪枝</strong></p>
 <p>先从整体树T0开始，对内部任意节点t，比较以t作为单节点树的损失与t作为根节点树的损失，如果单节点比下面一棵树还要好，就给剪掉。剪完后的树继续重复此过程。</p>
-<p>loss：<img src="https://www.zhihu.com/equation?tex=C_a(T" alt="[公式]">%3DC(T)%2B\alpha|T|)</p>
+<p>loss：$C_{a}(T)=C(T)+\alpha|T|$</p>
 <blockquote>
 <p>C(T)为对训练数据的误差，|T|为树的节点数量，alpha调节的是要精准度还是要模型的简单性。（过拟合与欠拟合）</p>
 </blockquote>
 </li>
 </ul>
-<h4 id="GBDT"><a href="#GBDT" class="headerlink" title="GBDT"></a>GBDT</h4><p>模型定义如下：<img src="https://www.zhihu.com/equation?tex=f_t(x" alt="[公式]">%3D\sum_{t%3D1}^{T}{h_t(x)})；f­­­t­(x)表示第t轮的模型，ht(x)表示第t颗决策树</p>
-<p>采用前向分步算法：<img src="https://www.zhihu.com/equation?tex=f_t(x" alt="[公式]">%3Df_{t-1}(x)%2Bh_t(x))</p>
+<h4 id="GBDT"><a href="#GBDT" class="headerlink" title="GBDT"></a>GBDT</h4><p>模型定义如下：$f_{t}(x)=\sum_{t=1}^{T} h_{t}(x)$；f­­­t­(x)表示第t轮的模型，ht(x)表示第t颗决策树</p>
+<p>采用前向分步算法：$f_{t}(x)=f_{t-1}(x)+h_{t}(x)$</p>
 <p>Loss：<img src="https://www.zhihu.com/equation?tex=L%28f_t%28x%29%2Cy%29%3DL%28f_%7Bt-1%7D%2Bh_t%28x%29%2Cy%29" alt="[公式]"></p>
 <p>第t轮的第i个样本的损失函数的负梯度表示为：<img src="https://www.zhihu.com/equation?tex=r_%7Bt%2Ci%7D%3D-%5B%5Cfrac%7B%5Cdelta+L%28y%2Cf%28x_i%29%29%7D%7B%5Cdelta+f%28x_i%29%7D%5D" alt="[公式]"></p>
 <p><img src="https://www.zhihu.com/equation?tex=r_%7Bt%2Ci%7D%3D-%5B%5Cfrac%7B%5Cdelta+L%28y%2Cf%28x_i%29%29%7D%7B%5Cdelta+f%28x_i%29%7D%5D%3Dy_i-f_%7Bm-1%7D%28x_i%29" alt="[公式]"></p>
@@ -255,10 +255,10 @@
 <p>针对每一个叶子节点里的样本，我们求出使损失函数最小，也就是拟合叶子节点最好的的输出值ctj如下(注意这里的yi是真实值，不是残差)：</p>
 <p><img src="https://www.zhihu.com/equation?tex=c_%7Bt%2Cj%7D%3Dargmin%5Csum_%7Bx_i%5Cin+R_%7Bt%2Cj%7D%7D%7BL%28y_i%2Cf_%7Bt-1%7D%28x_i%29%2Bc%29%7D" alt="[公式]"></p>
 <p>此时本轮的决策树拟合函数就得到了：</p>
-<p><img src="https://www.zhihu.com/equation?tex=h_t(x" alt="[公式]">%3D\sum_{j%3D1}^{J}{c_{t%2Cj}I(x\in+R_{t%2Cj})})</p>
-<p>然后本轮的强学习器也就得到了：</p>
-<p><img src="https://www.zhihu.com/equation?tex=f_t(x" alt="[公式]">%3Df_{t-1}(x)%2B\sum_{j%3D1}^{J}{c_{t%2Cj}I(x\in+R_{t%2Cj})})</p>
-<p>之后一直迭代下去，直到损失函数收敛.</p>
+<script type="math/tex; mode=display">
+h_{t}(x)=\sum_{j=1}^{J} c_{t, j} I\left(x \in R_{t, j}\right)</script><p>然后本轮的强学习器也就得到了：</p>
+<script type="math/tex; mode=display">
+f_{t}(x)=f_{t-1}(x)+\sum_{i=1}^{y} c_{t, j} I\left(x \in R_{t, j}\right)</script><p>之后一直迭代下去，直到损失函数收敛.</p>
 <h3 id="Xgboos"><a href="#Xgboos" class="headerlink" title="Xgboos"></a>Xgboos</h3><p>目标函数：$\mathcal{L}^{(t)}=\sum_{i=1}^{n} l\left(y_{i}, \hat{y}_{i}^{(t-1)}+f_{t}\left(\mathbf{x}_{i}\right)\right)+\Omega\left(f_{t}\right)$</p>
 <ul>
 <li>规整项$\Omega\left(f_{t}\right)$是一个递归的式子，规整项仅仅是第t颗树的，具体起来就是这棵树所有叶子节点权重向量的二范数。</li>
