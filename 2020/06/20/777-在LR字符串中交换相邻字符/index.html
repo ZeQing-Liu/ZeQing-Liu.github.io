@@ -20,25 +20,20 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="主要学习内容 异常处理：  删除异常值：箱线图；3-Sigma 12345678910111213141516def outliers_proc(data, col_name, scale&#x3D;3):    &quot;&quot;&quot;    用于清洗异常值，默认用 box_plot（scale&#x3D;3）进行清洗    :param data: 接收 pandas 数据格式    :param col_name: pandas">
+  <meta name="description" content="题目描述：在一个由 &#39;L&#39; , &#39;R&#39; 和 &#39;X&#39; 三个字符组成的字符串（例如&quot;RXXLRXRXL&quot;）中进行移动操作。一次移动操作指用一个&quot;LX&quot;替换一个&quot;XL&quot;，或者用一个&quot;XR&quot;替换一个&quot;RX&quot;。现给定起始字符串start和结束字符串end，请编写">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Task3_特种工程（学习打卡）">
-<meta property="og:url" content="http://yoursite.com/2020/03/28/Task3-%E7%89%B9%E7%A7%8D%E5%B7%A5%E7%A8%8B/index.html">
+<meta property="og:title" content="777.在LR字符串中交换相邻字符">
+<meta property="og:url" content="http://yoursite.com/2020/06/20/777-%E5%9C%A8LR%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E4%BA%A4%E6%8D%A2%E7%9B%B8%E9%82%BB%E5%AD%97%E7%AC%A6/index.html">
 <meta property="og:site_name" content="ZQ的学习笔记">
-<meta property="og:description" content="主要学习内容 异常处理：  删除异常值：箱线图；3-Sigma 12345678910111213141516def outliers_proc(data, col_name, scale&#x3D;3):    &quot;&quot;&quot;    用于清洗异常值，默认用 box_plot（scale&#x3D;3）进行清洗    :param data: 接收 pandas 数据格式    :param col_name: pandas">
+<meta property="og:description" content="题目描述：在一个由 &#39;L&#39; , &#39;R&#39; 和 &#39;X&#39; 三个字符组成的字符串（例如&quot;RXXLRXRXL&quot;）中进行移动操作。一次移动操作指用一个&quot;LX&quot;替换一个&quot;XL&quot;，或者用一个&quot;XR&quot;替换一个&quot;RX&quot;。现给定起始字符串start和结束字符串end，请编写">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/00831rSTly1gd9q3wcdefj31200msgmz.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/00831rSTly1gd9qc8ouorj30mg0dkt97.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/00831rSTly1gd9qce93s1j30p80dmt95.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/00831rSTly1gd9qi3ejzdj30sy0psq55.jpg">
-<meta property="article:published_time" content="2020-03-28T02:27:11.000Z">
-<meta property="article:modified_time" content="2020-03-28T09:13:43.304Z">
+<meta property="article:published_time" content="2020-06-20T02:16:16.000Z">
+<meta property="article:modified_time" content="2020-06-22T02:23:13.735Z">
 <meta property="article:author" content="ZQ Liu">
-<meta property="article:tag" content="数据挖掘">
+<meta property="article:tag" content="LeetCode">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/00831rSTly1gd9q3wcdefj31200msgmz.jpg">
 
-<link rel="canonical" href="http://yoursite.com/2020/03/28/Task3-%E7%89%B9%E7%A7%8D%E5%B7%A5%E7%A8%8B/">
+<link rel="canonical" href="http://yoursite.com/2020/06/20/777-%E5%9C%A8LR%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E4%BA%A4%E6%8D%A2%E7%9B%B8%E9%82%BB%E5%AD%97%E7%AC%A6/">
 
 
 <script id="page-configurations">
@@ -51,7 +46,7 @@
   };
 </script>
 
-  <title>Task3_特种工程（学习打卡） | ZQ的学习笔记</title>
+  <title>777.在LR字符串中交换相邻字符 | ZQ的学习笔记</title>
   
 
 
@@ -179,7 +174,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/28/Task3-%E7%89%B9%E7%A7%8D%E5%B7%A5%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/20/777-%E5%9C%A8LR%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E4%BA%A4%E6%8D%A2%E7%9B%B8%E9%82%BB%E5%AD%97%E7%AC%A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -192,7 +187,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Task3_特种工程（学习打卡）
+          777.在LR字符串中交换相邻字符
         </h1>
 
         <div class="post-meta">
@@ -201,9 +196,24 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-03-28 10:27:11 / 修改时间：17:13:43" itemprop="dateCreated datePublished" datetime="2020-03-28T10:27:11+08:00">2020-03-28</time>
+              <time title="创建时间：2020-06-20 10:16:16" itemprop="dateCreated datePublished" datetime="2020-06-20T10:16:16+08:00">2020-06-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-22 10:23:13" itemprop="dateModified" datetime="2020-06-22T10:23:13+08:00">2020-06-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
+                </span>
             </span>
 
           
@@ -219,62 +229,25 @@
 
 
       
-        <h2 id="主要学习内容"><a href="#主要学习内容" class="headerlink" title="主要学习内容"></a>主要学习内容</h2><ol>
-<li><p>异常处理：</p>
-<ul>
-<li><p>删除异常值：箱线图；3-Sigma</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outliers_proc</span><span class="params">(data, col_name, scale=<span class="number">3</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    用于清洗异常值，默认用 box_plot（scale=3）进行清洗</span></span><br><span class="line"><span class="string">    :param data: 接收 pandas 数据格式</span></span><br><span class="line"><span class="string">    :param col_name: pandas 列名</span></span><br><span class="line"><span class="string">    :param scale: 尺度</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line"> <span class="function"><span class="keyword">def</span> <span class="title">box_plot_outliers</span><span class="params">(data_ser, box_scale)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        利用箱线图去除异常值</span></span><br><span class="line"><span class="string">        :param data_ser: 接收 pandas.Series 数据格式</span></span><br><span class="line"><span class="string">        :param box_scale: 箱线图尺度，</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        """</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTly1gd9q3wcdefj31200msgmz.jpg" alt="image-20200328163018012" style="zoom:33%;" /></p>
+        <p><strong>题目描述：</strong>在一个由 <code>&#39;L&#39;</code> , <code>&#39;R&#39;</code> 和 <code>&#39;X&#39;</code> 三个字符组成的字符串（例如<code>&quot;RXXLRXRXL&quot;</code>）中进行移动操作。一次移动操作指用一个<code>&quot;LX&quot;</code>替换一个<code>&quot;XL&quot;</code>，或者用一个<code>&quot;XR&quot;</code>替换一个<code>&quot;RX&quot;</code>。现给定起始字符串<code>start</code>和结束字符串<code>end</code>，请编写代码，当且仅当存在一系列移动操作使得<code>start</code>可以转换成<code>end</code>时， 返回<code>True</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入: start &#x3D; &quot;RXXLRXRXL&quot;, end &#x3D; &quot;XRLXXRRLX&quot;</span><br><span class="line">输出: True</span><br><span class="line">解释:</span><br><span class="line">我们可以通过以下几步将start转换成end:</span><br><span class="line">RXXLRXRXL -&gt;</span><br><span class="line">XRXLRXRXL -&gt;</span><br><span class="line">XRLXRXRXL -&gt;</span><br><span class="line">XRLXXRRXL -&gt;</span><br><span class="line">XRLXXRRLX</span><br></pre></td></tr></table></figure>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="官方法一"><a href="#官方法一" class="headerlink" title="官方法一"></a>官方法一</h3><ul>
+<li><p><strong>转换不变性：</strong>字符串中的 <code>&#39;L&#39;</code> 和 <code>&#39;R&#39;</code> 是不会互相穿插的，意味着开始和结束的字符串如果只看 <code>&#39;L&#39;</code> 和 <code>&#39;R&#39;</code> 的话是一模一样的。</p>
 </li>
-<li><p>处理有偏分布：BOX-COX 转换</p>
-</li>
-<li><p>长尾截断</p>
-</li>
-</ul>
-</li>
-<li><p>归一化/标准化：标准正态；[0,1]区间；幂律分布<script type="math/tex">\log \left(\frac{1+x}{1+\operatorname{med} i a n}\right)</script></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 取 log，做归一化</span></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br><span class="line">min_max_scaler = preprocessing.MinMaxScaler()</span><br><span class="line">data[<span class="string">'power'</span>] = np.log(data[<span class="string">'power'</span>] + <span class="number">1</span>) </span><br><span class="line">data[<span class="string">'power'</span>] = ((data[<span class="string">'power'</span>] - np.min(data[<span class="string">'power'</span>])) / (np.max(data[<span class="string">'power'</span>]) - np.min(data[<span class="string">'power'</span>])))</span><br><span class="line">data[<span class="string">'power'</span>].plot.hist()</span><br></pre></td></tr></table></figure>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTly1gd9qc8ouorj30mg0dkt97.jpg" alt="image-20200328163821458" style="zoom:33%;" /><img src="https://tva1.sinaimg.cn/large/00831rSTly1gd9qce93s1j30p80dmt95.jpg" alt="image-20200328163830133" style="zoom: 33%;" /></p>
-</li>
-<li><p>数据分桶</p>
-<p><strong>优点：</strong></p>
-<ul>
-<li><p>离散后稀疏向量内积乘法运算速度更快，计算结果也方便存储，容易扩展；</p>
-</li>
-<li><p>离散后的特征对异常值更具鲁棒性</p>
-</li>
-<li><p>LR 属于广义线性模型，表达能力有限，经过离散化后，每个变量有单独的权重，相当于引入了非线性，能够提升模型的表达能力，加大拟合；</p>
-</li>
-<li><p>离散后特征可以进行特征交叉，提升表达能力</p>
-</li>
-<li><p>特征离散后模型更稳定</p>
+<li><p><strong>可到达性：</strong>设 $(i_1, i_2, \cdots )，(i^{‘}_1, i^{‘}_2, \cdots )$为每个字符 ‘L’ 在原始字符串和目标字符串的位置，$(j_1, j_2, \cdots )(j^{‘}_1, j^{‘}_2, \cdots )$为每个字符 ‘R’ 在原始字符串和目标字符串的位置，如果$i_k \geq i^{‘}_k $和 $j_k \leq j^{‘}_k $都能满足，这个字符串就是 ”可到达的“。</p>
+<blockquote>
+<p>L只能向左移，R只能向右移</p>
+</blockquote>
 </li>
 </ul>
-</li>
-<li><p>缺失值处理:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">canTransform</span><span class="params">(start, end)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> start.replace(<span class="string">'X'</span>,<span class="string">''</span>) != end.replace(<span class="string">'X'</span>, <span class="string">''</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (symbol, op) <span class="keyword">in</span> ((<span class="string">'L'</span>, operator.ge), (<span class="string">'R'</span>, operator.le)):</span><br><span class="line">          <span class="comment"># ge() &gt;=  ; le() &lt;= </span></span><br><span class="line">            B = (i <span class="keyword">for</span> i, c <span class="keyword">in</span> enumerate(end) <span class="keyword">if</span> c == symbol)</span><br><span class="line">            <span class="keyword">for</span> i, c <span class="keyword">in</span> enumerate(start):</span><br><span class="line">                <span class="keyword">if</span> c == symbol <span class="keyword">and</span> <span class="keyword">not</span> op(i, next(B)):</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>不处理(针对类似 XGBoost 等树模型);</li>
-<li>删除（缺失太多）</li>
-<li>插值补全</li>
-<li>分箱，缺失值一个箱</li>
-</ul>
-</li>
-<li><p>特征构造</p>
-</li>
-<li><p>特征筛选：</p>
-<ul>
-<li><p>过滤式(filter)：先对数据进行特征选择，然后在训练学习器，常见的方法有 Relief/方差选择发/相关系 数法/卡方检验法/互信息法;</p>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTly1gd9qi3ejzdj30sy0psq55.jpg" alt="image-20200328164358998" style="zoom:33%;" /></p>
-</li>
-<li><p>包裹式(wrapper)：直接把最终将要使用的学习器的性能作为特征子集的评价准则，常见方法有 LVM(Las Vegas Wrapper) ;</p>
-</li>
-<li><p>嵌入式(embedding):结合过滤式和包裹式，学习器训练过程中自动进行了特征选择，常见的有 lasso 回归;</p>
+<li><p>enumerate() 函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">enumerate(sequence, [start=<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">    sequence -- 一个序列、迭代器或其他支持迭代对象。</span><br><span class="line">    start -- 下标起始位置。</span><br><span class="line">    返回 enumerate(枚举) 对象</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;seq = [<span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'three'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i, element <span class="keyword">in</span> enumerate(seq):</span><br><span class="line"><span class="meta">... </span>    	print( i, element)</span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="number">0</span> one</span><br><span class="line"><span class="number">1</span> two</span><br><span class="line"><span class="number">2</span> three</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-</li>
-<li><p>数据降维</p>
-</li>
-</ol>
+<h3 id="官方解二"><a href="#官方解二" class="headerlink" title="官方解二"></a>官方解二</h3><h3 id="用时最快"><a href="#用时最快" class="headerlink" title="用时最快"></a>用时最快</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">canTransform</span><span class="params">(self,star,end)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> start.replace(<span class="string">'X'</span>,<span class="string">''</span>)!= end.replace(<span class="string">'x'</span>,<span class="string">''</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        sl,el,sr,er = <span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(start)):</span><br><span class="line">            <span class="keyword">if</span> start[i]==<span class="string">'L'</span>:</span><br><span class="line">                sl+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> start[i]==<span class="string">'R'</span>:</span><br><span class="line">                sr+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> end[i]==<span class="string">'L'</span>:</span><br><span class="line">                el+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> end[i]==<span class="string">'R'</span>:</span><br><span class="line">                er+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> sl&gt;el <span class="keyword">or</span> sr&lt;er:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
 
     </div>
     <div>
@@ -288,12 +261,12 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
 
-  <p><span>本文标题:</span>Task3_特种工程（学习打卡）</a></p>
+  <p><span>本文标题:</span>777.在LR字符串中交换相邻字符</a></p>
   <p><span>文章作者:</span>ZQ Liu</a></p>
-  <p><span>发布时间:</span>2020年03月28日 - 10:27:11</p>
-  <p><span>最后更新:</span>2020年03月28日 - 17:13:43</p>
-  <p><span>原始链接:</span><a href="/2020/03/28/Task3-%E7%89%B9%E7%A7%8D%E5%B7%A5%E7%A8%8B/" title="Task3_特种工程（学习打卡）">http://yoursite.com/2020/03/28/Task3-%E7%89%B9%E7%A7%8D%E5%B7%A5%E7%A8%8B/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2020/03/28/Task3-%E7%89%B9%E7%A7%8D%E5%B7%A5%E7%A8%8B/"  aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2020年06月20日 - 10:16:16</p>
+  <p><span>最后更新:</span>2020年06月22日 - 10:23:13</p>
+  <p><span>原始链接:</span><a href="/2020/06/20/777-%E5%9C%A8LR%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E4%BA%A4%E6%8D%A2%E7%9B%B8%E9%82%BB%E5%AD%97%E7%AC%A6/" title="777.在LR字符串中交换相邻字符">http://yoursite.com/2020/06/20/777-%E5%9C%A8LR%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E4%BA%A4%E6%8D%A2%E7%9B%B8%E9%82%BB%E5%AD%97%E7%AC%A6/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2020/06/20/777-%E5%9C%A8LR%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E4%BA%A4%E6%8D%A2%E7%9B%B8%E9%82%BB%E5%AD%97%E7%AC%A6/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -361,7 +334,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" rel="tag"># 数据挖掘</a>
+              <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
           </div>
 
         
@@ -370,13 +343,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/24/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98-Task1-%E8%B5%9B%E9%A2%98%E7%90%86%E8%A7%A3/" rel="prev" title="Task1_赛题理解">
-      <i class="fa fa-chevron-left"></i> Task1_赛题理解
+    <a href="/2020/04/28/136-%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97/" rel="prev" title="136.Single Number">
+      <i class="fa fa-chevron-left"></i> 136.Single Number
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/04/01/Task4-%E6%A8%A1%E5%9E%8B%E8%B0%83%E5%8F%82/" rel="next" title="Task4_模型调参">
-      Task4_模型调参 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -437,7 +407,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要学习内容"><span class="nav-number">1.</span> <span class="nav-text">主要学习内容</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题解"><span class="nav-number">1.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#官方法一"><span class="nav-number">1.1.</span> <span class="nav-text">官方法一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#官方解二"><span class="nav-number">1.2.</span> <span class="nav-text">官方解二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用时最快"><span class="nav-number">1.3.</span> <span class="nav-text">用时最快</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
