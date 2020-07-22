@@ -23,7 +23,7 @@
   <meta name="description" content="NLP、ML、DL">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ZQ的学习笔记">
-<meta property="og:url" content="http://yoursite.com/tags/%E6%89%93%E5%8D%A1/index.html">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="ZQ的学习笔记">
 <meta property="og:description" content="NLP、ML、DL">
 <meta property="og:locale" content="zh_CN">
@@ -31,20 +31,20 @@
 <meta property="article:tag" content="NLP">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/tags/%E6%89%93%E5%8D%A1/">
+<link rel="canonical" href="http://yoursite.com/page/2/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : false,
+    isHome : true,
     isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: 打卡 | ZQ的学习笔记</title>
+  <title>ZQ的学习笔记</title>
   
 
 
@@ -167,49 +167,145 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+        
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">打卡
-          <small>标签</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/Information-Extraction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZQ Liu">
+      <meta itemprop="description" content="NLP、ML、DL">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZQ的学习笔记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/14/Information-Extraction/" class="post-title-link" itemprop="url">Information-Extraction</a>
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-14 14:55:06 / 修改时间：17:51:11" itemprop="dateCreated datePublished" datetime="2020-03-14T14:55:06+08:00">2020-03-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2020</h1>
+          <p><strong>NER作为序列标记</strong></p>
+<p>指定的标记同时捕获边界和类型。序列分类器(如MEMM/CRF或bi-LSTM)被训练为在文本中使用标记来标记标记，这些标记表示特定类型的命名实体的存在。</p>
+<p><img src="https://tva1.sinaimg.cn/large/00831rSTly1gctgr2ewzoj30qu0ki1dr.jpg" alt="image-20200314145732575"></p>
+<p><strong>IO encoding</strong>简单的为每个 token 标注，如果不是 NE 就标为 O(other)，所以一共需要 C+1 个类别(label)。而<strong>IOB encoding</strong>需要 2C+1 个类别(label)，因为它标了 NE boundary，B 代表 begining，NE 开始的位置，I 代表 continue，承接上一个 NE，如果连续出现两个 B，自然就表示上一个 B 已经结束了。</p>
+<ul>
+<li>提取特征并训练<strong>词性标记类型的MEMM或CRF序列模型</strong></li>
+</ul>
+<blockquote>
+<p>由于汉语的特殊性，除了词汇层面的特征外，汉字层面的特征也被充分地用来辅助提高NER的效果.</p>
+<p>由于汉语分词和NER的密切联系，有研究发现分词结果可以有效地提高汉语NER的效果。</p>
+<p>研究表明，在模型不变的情况下，全局信息和外部知识确实可以显著地提高识别的效果。维基百科知识是最常见且有效的外部知识，而在汉语NER中，知网作为一个汉语特有的词汇语义知识库，也被充分地应用在NER研究中。</p>
+</blockquote>
+<p><strong>关系抽取</strong></p>
+<p><strong>关系抽取</strong>需要从文本中抽取两个或多个实体之间的语义关系，主要方法有下面几类：</p>
+<ul>
+<li><p><strong>基于模板的方法(hand-written patterns)</strong></p>
+</li>
+<li><ul>
+<li>基于触发词/字符串</li>
+<li>基于依存句法</li>
+</ul>
+</li>
+<li><p><strong>监督学习(supervised machine learning)</strong></p>
+</li>
+<li><ul>
+<li>机器学习</li>
+<li>深度学习（Pipeline vs Joint Model）</li>
+</ul>
+</li>
+<li><p><strong>半监督/无监督学习(semi-supervised and unsupervised)</strong></p>
+</li>
+<li><ul>
+<li>Bootstrapping</li>
+<li>Distant supervision</li>
+<li>Unsupervised learning from the web</li>
+</ul>
+</li>
+</ul>
+<p>监督学习去做关系提取的过程如下：首先特定的关系和命名实体已经选择了，训练集语料手动去标注关系和命名实体，接着就是注释的语料就是用来去训练分类器去标注没有见过的训练集。</p>
+<p>最直接的方法有3步：</p>
+<ul>
+<li>第一步，找寻一对命名实体。通常在一句话中。</li>
+<li>第二步，二元分类器的作用是用来判断两个命名实体之间是否有关系</li>
+<li>第三步，分类器将用来去标记命名实体之间的关系</li>
+</ul>
+<p><strong>监督学习-深度学习</strong></p>
+<p>深度学习方法又分为两大类，pipeline 和 joint model</p>
+<ul>
+<li><strong>Pipeline</strong><br>把实体识别和关系分类作为两个完全独立的过程，不会相互影响，关系的识别依赖于实体识别的效果</li>
+<li><strong>Joint Model</strong><br>实体识别和关系分类的过程共同优化</li>
+</ul>
+<p>深度学习用到的特征通常有：</p>
+<ul>
+<li>Position embeddings</li>
+<li>Word embeddings</li>
+<li>Knowledge embeddings</li>
+</ul>
+<p>模型通常有 CNN/RNN + attention，损失函数 ranking loss 要优于交叉熵。</p>
+<p><strong>远程监督：</strong></p>
+<p>Mintz<strong>提出一个假设</strong>，如果知识库中存在某个实体对的某种关系，那么所有包含此对实体的数据都表达这个关系。理论上，这让关系抽取的工作大大简化。但<strong>远程监督</strong>也有<strong>副作用</strong>，因为不用人为的标注，只能机械地依赖外部知识库，而外部知识库会将同一对实体的所有情况都会标注一种关系，其标签的准确度就会大大的降低。</p>
+<p><strong>EALO</strong>(Expressed-at-least-once)假设：如果知识库中存在某个实体对的某种关系，那么至少有一个提到此对实体的数据表达此种关系。</p>
+<p><strong>主流</strong>的<strong>关系抽取模型</strong>几乎都在使用<strong>引入多示例学习</strong>的<strong>远程监督</strong>方法，<strong>再结合</strong>深度学习,卷积神经网络（convolutional neural networks, CNN）肩负着主要任务。</p>
+<p><strong>多示例学习</strong>是一种<strong>监督学习</strong>模式.可以对具有某种特征的数据样本集合打标签，这样的样本集合称为<strong>袋（bag)</strong>. 每个bag有标签，而每个bag中含有多个数据样本，每个样本即为一个示例（instance)。</p>
+
+      
     </div>
+    <div>
+      
+    </div>
+    <div>
+      
+     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-21T15:45:04+08:00"
-              content="2020-07-21">
-          07-21
-        </time>
-      </div>
 
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/07/21/%E8%B5%9B%E9%A2%98%E7%90%86%E8%A7%A3/" itemprop="url">
-            <span itemprop="name">Task1_赛题理解</span>
-          </a>
-      </h2>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
 
-    </header>
   </article>
+  
+  
+  
 
-    </div>
   </div>
-  
-  
-  
 
   
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
 
 
 
