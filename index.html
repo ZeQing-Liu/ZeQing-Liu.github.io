@@ -384,7 +384,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-23 09:44:33" itemprop="dateModified" datetime="2020-07-23T09:44:33+08:00">2020-07-23</time>
+                <time title="修改时间：2020-07-23 09:55:48" itemprop="dateModified" datetime="2020-07-23T09:55:48+08:00">2020-07-23</time>
               </span>
 
           
@@ -438,7 +438,27 @@ F 1=2 * \frac{(\text {precision } * \text {recall})}{(\text {precision}+\text {r
 <p>Bert是高配款的词向量，具有强大的建模学习能力。</p>
 </li>
 </ul>
-<h2 id="四、数据分析"><a href="#四、数据分析" class="headerlink" title="四、数据分析"></a>四、数据分析</h2>
+<h2 id="四、数据分析"><a href="#四、数据分析" class="headerlink" title="四、数据分析"></a>四、数据分析</h2><ul>
+<li><h4 id="句子长度分析"><a href="#句子长度分析" class="headerlink" title="句子长度分析"></a>句子长度分析</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%pylab inline</span><br><span class="line">train_df[<span class="string">'text_len'</span>] = train_df[<span class="string">'text'</span>].apply(<span class="keyword">lambda</span> x: len(x.split(<span class="string">' '</span>)))</span><br><span class="line">print(train_df[<span class="string">'text_len'</span>].describe())</span><br></pre></td></tr></table></figure>
+<p><img src="/Users/lzq/Library/Application Support/typora-user-images/image-20200723094940092.png" alt="image-20200723094940092"></p>
+<ul>
+<li>直方图展示</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">_ = plt.hist(train_df[<span class="string">'text_len'</span>], bins=<span class="number">200</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Text char count'</span>)</span><br><span class="line">plt.title(<span class="string">"Histogram of char count"</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/Users/lzq/Library/Application Support/typora-user-images/image-20200723095221681.png" alt="image-20200723095221681"></p>
+</li>
+<li><h4 id="类别分布"><a href="#类别分布" class="headerlink" title="类别分布"></a>类别分布</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">train_df[<span class="string">'label'</span>].value_counts().plot(kind=<span class="string">'bar'</span>)</span><br><span class="line">plt.title(<span class="string">'News class count'</span>)</span><br><span class="line">plt.xlabel(<span class="string">"category"</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/Users/lzq/Library/Application Support/typora-user-images/image-20200723095143548.png" alt="image-20200723095143548"></p>
+</li>
+<li><h4 id="字符分布统计"><a href="#字符分布统计" class="headerlink" title="字符分布统计"></a>字符分布统计</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line">all_lines = <span class="string">' '</span>.join(list(train_df[<span class="string">'text'</span>]))</span><br><span class="line">word_count = Counter(all_lines.split(<span class="string">" "</span>))</span><br><span class="line">word_count = sorted(word_count.items(), key=<span class="keyword">lambda</span> d:d[<span class="number">1</span>], reverse = <span class="literal">True</span>)</span><br><span class="line">print(len(word_count))</span><br><span class="line">print(word_count[<span class="number">0</span>])</span><br><span class="line">print(word_count[<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="分析结论"><a href="#分析结论" class="headerlink" title="分析结论"></a>分析结论</h3><ol>
+<li>字符个数平均为1000个，可能需要截断</li>
+<li>类别分布不均匀，会严重影响模型的精度</li>
+<li>总共包括7000-8000个字符</li>
+</ol>
+
       
     </div>
     <div>
