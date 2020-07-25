@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="基于机器学习的文本分类学习目标 学会TF-IDF的原理和使用 使用sklearn的机器学习模型完成文本分类  机器学习模型文本表示方法One-hot1234567891011句子1：我 爱 北 京 天 安 门句子2：我 喜 欢 上 海&amp;#123;	&#39;我&#39;: 1, &#39;爱&#39;: 2, &#39;北&#39;: 3, &#39;京&#39;: 4, &#39;天&#39;:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于机器学习的文本分类">
+<meta property="og:url" content="http://yoursite.com/2020/07/25/%E5%9F%BA%E4%BA%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB/index.html">
+<meta property="og:site_name" content="ZQ的学习笔记">
+<meta property="og:description" content="基于机器学习的文本分类学习目标 学会TF-IDF的原理和使用 使用sklearn的机器学习模型完成文本分类  机器学习模型文本表示方法One-hot1234567891011句子1：我 爱 北 京 天 安 门句子2：我 喜 欢 上 海&amp;#123;	&#39;我&#39;: 1, &#39;爱&#39;: 2, &#39;北&#39;: 3, &#39;京&#39;: 4, &#39;天&#39;:">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3cnjy0ygj313o0bmmyz.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3cg6agu9j30pu0cw0u1.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3cu6aglsj315a0f0jue.jpg">
+<meta property="article:published_time" content="2020-07-25T02:00:15.000Z">
+<meta property="article:modified_time" content="2020-07-25T10:06:17.223Z">
+<meta property="article:author" content="ZQ Liu">
+<meta property="article:tag" content="NLP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3cnjy0ygj313o0bmmyz.jpg">
+
+<link rel="canonical" href="http://yoursite.com/2020/07/25/%E5%9F%BA%E4%BA%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>基于机器学习的文本分类 | ZQ的学习笔记</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
+
+<link rel="alternate" href="/atom.xml" title="ZQ的学习笔记" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <script src="/live2d/autoload.js"></script>
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZQ的学习笔记</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/25/%E5%9F%BA%E4%BA%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZQ Liu">
+      <meta itemprop="description" content="NLP、ML、DL">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZQ的学习笔记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基于机器学习的文本分类
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-25 10:00:15 / 修改时间：18:06:17" itemprop="dateCreated datePublished" datetime="2020-07-25T10:00:15+08:00">2020-07-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+
+
+      
+        <h2 id="基于机器学习的文本分类"><a href="#基于机器学习的文本分类" class="headerlink" title="基于机器学习的文本分类"></a>基于机器学习的文本分类</h2><h3 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h3><ul>
+<li>学会TF-IDF的原理和使用</li>
+<li>使用sklearn的机器学习模型完成文本分类</li>
+</ul>
+<h3 id="机器学习模型"><a href="#机器学习模型" class="headerlink" title="机器学习模型"></a>机器学习模型</h3><h4 id="文本表示方法"><a href="#文本表示方法" class="headerlink" title="文本表示方法"></a>文本表示方法</h4><h5 id="One-hot"><a href="#One-hot" class="headerlink" title="One-hot"></a>One-hot</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">句子1：我 爱 北 京 天 安 门</span><br><span class="line">句子2：我 喜 欢 上 海</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&#39;我&#39;: 1, &#39;爱&#39;: 2, &#39;北&#39;: 3, &#39;京&#39;: 4, &#39;天&#39;: 5, &#39;安&#39;: 6, &#39;门&#39;: 7, &#39;喜&#39;: 8, &#39;欢&#39;: 9, &#39;上&#39;: 10, &#39;海&#39;: 11</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">我：[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]</span><br><span class="line">爱：[0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]</span><br><span class="line">...</span><br><span class="line">海：[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]</span><br></pre></td></tr></table></figure>
+<h5 id="Bag-of-Words"><a href="#Bag-of-Words" class="headerlink" title="Bag of Words"></a>Bag of Words</h5><p>每个文档的字/词可以使用其出现次数来进行表示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">句子1：我 爱 北 京 天 安 门</span><br><span class="line">转换为 [1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0]</span><br><span class="line"></span><br><span class="line">句子2：我 喜 欢 上 海</span><br><span class="line">转换为 [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> CountVectorizer</span><br><span class="line">corpus = [</span><br><span class="line">    <span class="string">'我爱北京天安门'</span>,</span><br><span class="line">    <span class="string">'我爱上海的门'</span>,</span><br><span class="line">]</span><br><span class="line">vectorizer = CountVectorizer(analyzer =<span class="string">'char'</span>)</span><br><span class="line">count = vectorizer.fit_transform(corpus)</span><br><span class="line">print(vectorizer.get_feature_names())  </span><br><span class="line">print(vectorizer.vocabulary_)</span><br><span class="line">print(count.toarray())</span><br></pre></td></tr></table></figure>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3cnjy0ygj313o0bmmyz.jpg" alt="image-20200725173247152"></p>
+<h5 id="N-gram"><a href="#N-gram" class="headerlink" title="N-gram"></a>N-gram</h5><p>相邻单词组合成为新的单词</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># N &#x3D; 2</span><br><span class="line">句子1：我爱 爱北 北京 京天 天安 安门</span><br><span class="line">句子2：我喜 喜欢 欢上 上海</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> CountVectorizer</span><br><span class="line">data = [<span class="string">'我爱北京天安门'</span>,</span><br><span class="line">    <span class="string">'我喜欢上海'</span>]</span><br><span class="line">vec = CountVectorizer(analyzer =<span class="string">'char'</span>,min_df=<span class="number">1</span>, ngram_range=(<span class="number">2</span>,<span class="number">2</span>))</span><br><span class="line">X = vec.fit_transform(data) <span class="comment"># transform text to metrix </span></span><br><span class="line">vec.get_feature_names() <span class="comment"># get features</span></span><br><span class="line">X.toarray()</span><br><span class="line">df = pd.DataFrame(X.toarray(), columns=vec.get_feature_names()) <span class="comment"># to DataFrame</span></span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3cg6agu9j30pu0cw0u1.jpg" alt="image-20200725172538480"></p>
+<h5 id="TF-IDF"><a href="#TF-IDF" class="headerlink" title="TF-IDF"></a>TF-IDF</h5><p>TF：<strong>词语频率</strong>。该词语在当前文档出现的次数 / 当前文档中词语的总数</p>
+<p>IDF：<strong>逆文档频率</strong>：语料库中文档总数除以含有该词语的文档数量，然后再取对数。log_e（文档总数 / 出现该词语的文档总数）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfVectorizer, TfidfTransformer</span><br><span class="line">corpus = [</span><br><span class="line">    <span class="string">'我爱北京天安门'</span>,</span><br><span class="line">    <span class="string">'我喜欢上海'</span>,</span><br><span class="line">]</span><br><span class="line">tfidf_vec = TfidfVectorizer(analyzer =<span class="string">'char'</span>) </span><br><span class="line">tfidf_matrix = tfidf_vec.fit_transform(corpus)</span><br><span class="line"><span class="comment">#print(tfidf_vec.get_feature_names())</span></span><br><span class="line"><span class="comment">#print(tfidf_vec.vocabulary_)</span></span><br><span class="line">print(tfidf_matrix.toarray())</span><br></pre></td></tr></table></figure>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3cu6aglsj315a0f0jue.jpg" alt="image-20200725173908953"></p>
+<h3 id="文本分类"><a href="#文本分类" class="headerlink" title="文本分类"></a>文本分类</h3><h4 id="RidgeClassifier——岭回归分类器"><a href="#RidgeClassifier——岭回归分类器" class="headerlink" title="RidgeClassifier——岭回归分类器"></a>RidgeClassifier——岭回归分类器</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sklearn.linear_model.RidgeClassifier(</span><br><span class="line">  alpha=<span class="number">1.0</span>,           <span class="comment"># 正则化强度;必须是正的浮点数。</span></span><br><span class="line">  fit_intercept=<span class="literal">True</span>,  <span class="comment"># 计算截距</span></span><br><span class="line">  normalize=<span class="literal">False</span>,     <span class="comment"># 当fit_intercept被设置为False时，将忽略该参数。若为真，则回归前将对回归数X进行归一化处理，方法是减去均值再除以l2-范数。</span></span><br><span class="line">  copy_X=<span class="literal">True</span>,         <span class="comment">#</span></span><br><span class="line">  max_iter=<span class="literal">None</span>,       <span class="comment"># 共轭梯度求解器的最大迭代次数</span></span><br><span class="line">  tol=<span class="number">0.001</span>,           <span class="comment"># 求解的精度</span></span><br><span class="line">  class_weight=<span class="literal">None</span>, </span><br><span class="line">  solver=<span class="string">'auto'</span>,       <span class="comment"># “auto”:根据数据类型自动选择求解器。</span></span><br><span class="line">  random_state=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="Count-Vectors-RidgeClassifier"><a href="#Count-Vectors-RidgeClassifier" class="headerlink" title="Count Vectors + RidgeClassifier"></a>Count Vectors + RidgeClassifier</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> CountVectorizer</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> RidgeClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> f1_score</span><br><span class="line"></span><br><span class="line">train_df = pd.read_csv(<span class="string">'../input/train_set.csv'</span>, sep=<span class="string">'\t'</span>, nrows=<span class="number">15000</span>)</span><br><span class="line"></span><br><span class="line">vectorizer = CountVectorizer(max_features=<span class="number">3000</span>)</span><br><span class="line">train_test = vectorizer.fit_transform(train_df[<span class="string">'text'</span>])</span><br><span class="line"></span><br><span class="line">clf = RidgeClassifier()</span><br><span class="line">clf.fit(train_test[:<span class="number">10000</span>], train_df[<span class="string">'label'</span>].values[:<span class="number">10000</span>])</span><br><span class="line"></span><br><span class="line">val_pred = clf.predict(train_test[<span class="number">10000</span>:])</span><br><span class="line">print(f1_score(train_df[<span class="string">'label'</span>].values[<span class="number">10000</span>:], val_pred, average=<span class="string">'macro'</span>))</span><br><span class="line"><span class="comment"># 0.74</span></span><br></pre></td></tr></table></figure>
+<h4 id="TF-IDF-RidgeClassifier"><a href="#TF-IDF-RidgeClassifier" class="headerlink" title="TF-IDF +  RidgeClassifier"></a>TF-IDF +  RidgeClassifier</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfVectorizer</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> RidgeClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> f1_score</span><br><span class="line"></span><br><span class="line">train_df = pd.read_csv(<span class="string">'../input/train_set.csv'</span>, sep=<span class="string">'\t'</span>, nrows=<span class="number">15000</span>)</span><br><span class="line"></span><br><span class="line">tfidf = TfidfVectorizer(ngram_range=(<span class="number">1</span>,<span class="number">3</span>), max_features=<span class="number">3000</span>)</span><br><span class="line">train_test = tfidf.fit_transform(train_df[<span class="string">'text'</span>])</span><br><span class="line"></span><br><span class="line">clf = RidgeClassifier()</span><br><span class="line">clf.fit(train_test[:<span class="number">10000</span>], train_df[<span class="string">'label'</span>].values[:<span class="number">10000</span>])</span><br><span class="line"></span><br><span class="line">val_pred = clf.predict(train_test[<span class="number">10000</span>:])</span><br><span class="line">print(f1_score(train_df[<span class="string">'label'</span>].values[<span class="number">10000</span>:], val_pred, average=<span class="string">'macro'</span>))</span><br></pre></td></tr></table></figure>
+
+    </div>
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>基于机器学习的文本分类</a></p>
+  <p><span>文章作者:</span>ZQ Liu</a></p>
+  <p><span>发布时间:</span>2020年07月25日 - 10:00:15</p>
+  <p><span>最后更新:</span>2020年07月25日 - 18:06:17</p>
+  <p><span>原始链接:</span><a href="/2020/07/25/%E5%9F%BA%E4%BA%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB/" title="基于机器学习的文本分类">http://yoursite.com/2020/07/25/%E5%9F%BA%E4%BA%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2020/07/25/%E5%9F%BA%E4%BA%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+      
+    </div>
+    <div>
+      
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+     </div>
+
+
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="fa fa-wechat"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/22/python/" rel="prev" title="python">
+      <i class="fa fa-chevron-left"></i> python
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于机器学习的文本分类"><span class="nav-number">1.</span> <span class="nav-text">基于机器学习的文本分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习目标"><span class="nav-number">1.1.</span> <span class="nav-text">学习目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机器学习模型"><span class="nav-number">1.2.</span> <span class="nav-text">机器学习模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文本表示方法"><span class="nav-number">1.2.1.</span> <span class="nav-text">文本表示方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#One-hot"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">One-hot</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Bag-of-Words"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">Bag of Words</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#N-gram"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">N-gram</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#TF-IDF"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">TF-IDF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本分类"><span class="nav-number">1.3.</span> <span class="nav-text">文本分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RidgeClassifier——岭回归分类器"><span class="nav-number">1.3.1.</span> <span class="nav-text">RidgeClassifier——岭回归分类器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Count-Vectors-RidgeClassifier"><span class="nav-number">1.3.2.</span> <span class="nav-text">Count Vectors + RidgeClassifier</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TF-IDF-RidgeClassifier"><span class="nav-number">1.3.3.</span> <span class="nav-text">TF-IDF +  RidgeClassifier</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ZQ Liu</p>
+  <div class="site-description" itemprop="description">NLP、ML、DL</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZeQing-Liu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZeQing-Liu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zeqing.liu@qq.com" title="E-Mail → mailto:zeqing.liu@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZQ Liu</span>
+</div>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+</body>
+</html>
